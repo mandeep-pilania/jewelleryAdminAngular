@@ -1,0 +1,89 @@
+<div class="d-flex vh-100">
+  <nav class="sidebar">
+    <!-- Fixed Logo Top -->
+    <div class="sidebar-logo">
+      <img src="../../../assets/images/common/logo2.png" alt="Logo" />
+    </div>
+
+    <!-- Scrollable Menu -->
+    <div class="sidebar-menu">
+      <ul class="nav nav-pills flex-column mb-auto p-2">
+        <li class="nav-item mb-2">
+          <a routerLink="/dashboard" class="nav-link" routerLinkActive="active">
+            <i class="bi bi-speedometer2 me-2"></i> Dashboard
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a routerLink="/payments" class="nav-link" routerLinkActive="active">
+            <i class="bi bi-wallet2 me-2"></i> Payments
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a
+            routerLink="/sale-reports"
+            class="nav-link"
+            routerLinkActive="active"
+          >
+            <i class="bi bi-graph-up me-2"></i> Sale Reports
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a routerLink="/category" class="nav-link" routerLinkActive="active">
+            <i class="bi bi-tags me-2"></i> Category
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a routerLink="/customers" class="nav-link" routerLinkActive="active">
+            <i class="bi bi-people me-2"></i> Customers
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a routerLink="/invoice" class="nav-link" routerLinkActive="active">
+            <i class="bi bi-receipt me-2"></i> Invoice
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a routerLink="/supplier" class="nav-link" routerLinkActive="active">
+            <i class="bi bi-truck me-2"></i> Suppliers
+          </a>
+        </li>
+
+        <li class="nav-item mb-2">
+          <a routerLink="/branch" class="nav-link" routerLinkActive="active">
+            <i class="bi bi-diagram-3 me-2"></i> Branches
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a routerLink="/products" class="nav-link" routerLinkActive="active">
+            <i class="bi bi-box-seam me-2"></i> Products
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a routerLink="/warehouse" class="nav-link" routerLinkActive="active">
+            <i class="bi bi-house-door me-2"></i> Warehouses
+          </a>
+        </li>
+        <!-- <li class="nav-item mb-2">
+          <a
+            routerLink="/warehouse-stock"
+            class="nav-link"
+            routerLinkActive="active"
+          >
+            <i class="bi bi-stack me-2"></i> Warehouse Stocks
+          </a>
+        </li> -->
+      </ul>
+    </div>
+
+    <!-- Fixed Logout Bottom -->
+    <div class="sidebar-logout">
+      <ul class="nav flex-column p-2">
+        <li class="nav-item mb-2 logout-link" (click)="Logout()">
+          <a class="nav-link">
+            <i class="bi bi-box-arrow-right me-2"></i> Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>

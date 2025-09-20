@@ -1,0 +1,97 @@
+<div
+  class="d-flex vh-100 align-items-center justify-content-center bg-light flex-column"
+>
+  <!-- Login Form -->
+  <form
+    [formGroup]="LoginForm"
+    (ngSubmit)="Login()"
+    class="p-4 bg-white rounded shadow"
+    style="width: 100%; max-width: 400px"
+    novalidate
+  >
+    <h2 class="mb-4 text-center">Login</h2>
+
+    <div class="mb-3">
+      <label for="userName" class="form-label">UserName</label>
+      <input
+        type="text"
+        id="userName"
+        class="form-control"
+        formControlName="userName"
+        placeholder="Enter UserName"
+        required
+        [class.is-invalid]="
+          V['userName'].invalid &&
+          (V['userName'].dirty || V['userName'].touched)
+        "
+      />
+      <!-- pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" -->
+      <div
+        *ngIf="
+          V['userName'].invalid &&
+          (V['userName'].dirty || V['userName'].touched)
+        "
+        class="invalid-feedback"
+      >
+        <div *ngIf="V['userName'].errors?.['required']">
+          UserName is required.
+        </div>
+        <!-- <div *ngIf="V['email'].errors?.['pattern']">
+          Please enter a valid email.
+        </div> -->
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label for="password" class="form-label">Password</label>
+      <input
+        type="password"
+        id="password"
+        class="form-control"
+        formControlName="password"
+        placeholder="Password"
+        required
+        [class.is-invalid]="
+          V['password'].invalid &&
+          (V['password'].dirty || V['password'].touched)
+        "
+      />
+      <div
+        *ngIf="
+          V['password'].invalid &&
+          (V['password'].dirty || V['password'].touched)
+        "
+        class="invalid-feedback"
+      >
+        <div *ngIf="V['password'].errors?.['required']">
+          Password is required.
+        </div>
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary w-100"
+      [disabled]="LoginForm.invalid"
+    >
+      Login
+    </button>
+  </form>
+
+  <!-- Simple text with highlighted link -->
+  <div
+    class="mt-3 text-center"
+    style="font-size: 0.95rem"
+    *ngIf="ShowDetailButton"
+  >
+    <span>Don't want to login? </span>
+    <a
+      href="#"
+      class="fw-bold text-primary"
+      (click)="viewProductDetails()"
+      style="text-decoration: none"
+    >
+      View Product Details
+    </a>
+  </div>
+</div>

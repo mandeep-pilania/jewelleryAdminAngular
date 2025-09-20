@@ -1,0 +1,226 @@
+<section class="p-0" [formGroup]="branchForm">
+  <div class="row">
+    <!-- Header with Back Button -->
+    <div
+      class="col-lg-12 d-flex justify-content-between align-items-center mb-3"
+    >
+      <h5>➕ Add Branch</h5>
+      <button class="btn btn-primary" onclick="history.back()">← Back</button>
+    </div>
+
+    <!-- Form Container -->
+    <div class="col-lg-12">
+      <div
+        class="table-responsive"
+        style="
+          background: #fff;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        "
+      >
+        <div class="row g-3">
+          <!-- Branch Name -->
+          <div class="col-md-6 mb-3">
+            <label for="branchName" class="form-label">Branch Name</label>
+            <input
+              type="text"
+              id="branchName"
+              class="form-control"
+              formControlName="branchName"
+              placeholder="Enter branch name"
+              [class.is-invalid]="
+                V['branchName'].invalid &&
+                (V['branchName'].dirty || V['branchName'].touched)
+              "
+            />
+            <div
+              *ngIf="
+                V['branchName'].invalid &&
+                (V['branchName'].dirty || V['branchName'].touched)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="V['branchName'].errors?.['required']">
+                Branch Name is required.
+              </div>
+            </div>
+          </div>
+
+          <!-- Branch Manager -->
+          <div class="col-md-6 mb-3">
+            <label for="manager" class="form-label">Branch Manager</label>
+            <input
+              type="text"
+              id="manager"
+              class="form-control"
+              formControlName="manager"
+              placeholder="Enter manager name"
+              [class.is-invalid]="
+                V['manager'].invalid &&
+                (V['manager'].dirty || V['manager'].touched)
+              "
+            />
+            <div
+              *ngIf="
+                V['manager'].invalid &&
+                (V['manager'].dirty || V['manager'].touched)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="V['manager'].errors?.['required']">
+                Branch Manager is required.
+              </div>
+            </div>
+          </div>
+
+          <!-- Address -->
+          <div class="col-12 mb-3">
+            <label for="address" class="form-label">Address</label>
+            <textarea
+              id="address"
+              class="form-control"
+              rows="3"
+              formControlName="address"
+              placeholder="Enter branch address"
+              [class.is-invalid]="
+                V['address'].invalid &&
+                (V['address'].dirty || V['address'].touched)
+              "
+            ></textarea>
+            <div
+              *ngIf="
+                V['address'].invalid &&
+                (V['address'].dirty || V['address'].touched)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="V['address'].errors?.['required']">
+                Address is required.
+              </div>
+            </div>
+          </div>
+
+          <!-- City -->
+          <div class="col-md-4 mb-3">
+            <label for="city" class="form-label">City</label>
+            <input
+              type="text"
+              id="city"
+              class="form-control"
+              formControlName="city"
+              placeholder="Enter city"
+              [class.is-invalid]="
+                V['city'].invalid && (V['city'].dirty || V['city'].touched)
+              "
+            />
+            <div
+              *ngIf="
+                V['city'].invalid && (V['city'].dirty || V['city'].touched)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="V['city'].errors?.['required']">
+                City is required.
+              </div>
+            </div>
+          </div>
+
+          <!-- State -->
+          <div class="col-md-4 mb-3">
+            <label for="state" class="form-label">State</label>
+            <input
+              type="text"
+              id="state"
+              class="form-control"
+              formControlName="state"
+              placeholder="Enter state"
+              [class.is-invalid]="
+                V['state'].invalid && (V['state'].dirty || V['state'].touched)
+              "
+            />
+            <div
+              *ngIf="
+                V['state'].invalid && (V['state'].dirty || V['state'].touched)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="V['state'].errors?.['required']">
+                State is required.
+              </div>
+            </div>
+          </div>
+
+          <!-- Phone -->
+          <div class="col-md-4 mb-3">
+            <label for="phone" class="form-label">Phone Number</label>
+            <input
+              type="tel"
+              id="phone"
+              class="form-control"
+              formControlName="phone"
+              placeholder="Enter phone number"
+              [class.is-invalid]="
+                V['phone'].invalid && (V['phone'].dirty || V['phone'].touched)
+              "
+            />
+            <div
+              *ngIf="
+                V['phone'].invalid && (V['phone'].dirty || V['phone'].touched)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="V['phone'].errors?.['required']">
+                Phone number is required.
+              </div>
+              <div *ngIf="V['phone'].errors?.['pattern']">
+                Enter valid 10-digit phone number.
+              </div>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="col-md-6 mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              id="email"
+              class="form-control"
+              formControlName="email"
+              placeholder="Enter email address"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+              [class.is-invalid]="
+                V['email'].invalid && (V['email'].dirty || V['email'].touched)
+              "
+            />
+            <div
+              *ngIf="
+                V['email'].invalid && (V['email'].dirty || V['email'].touched)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="V['email'].errors?.['required']">
+                Email is required.
+              </div>
+              <div *ngIf="V['email'].errors?.['pattern']">
+                Please enter a valid email.
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="col-12 d-flex justify-content-center mt-3">
+            <button
+              class="btn btn-primary"
+              style="width: 200px"
+              (click)="onSubmit()"
+              [disabled]="branchForm.invalid"
+            >
+              Add Branch
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,175 @@
+<section class="p-0">
+  <div class="row">
+    <!-- Header with Add button -->
+    <div
+      class="col-lg-12 d-flex justify-content-between align-items-center mb-3"
+    >
+      <h5>🏢 All Warehouses</h5>
+      <button
+        class="btn btn-primary add-btn"
+        (click)="openDialog(warehouseDialog)"
+      >
+        <span class="icon">+</span> Add
+      </button>
+    </div>
+
+    <!-- Table -->
+    <div class="col-lg-12">
+      <table class="table table-striped table-hover text-center">
+        <thead class="bg-primary text-white">
+          <tr>
+            <th>Category</th>
+            <th>Subcategory</th>
+            <th>Quantity</th>
+            <th>Created At</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of AllWarehouses!">
+            <td>{{ item.category }}</td>
+            <td>{{ item.subcategory }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.createdAt | date : "shortDate" }}</td>
+            <td>
+              <button
+                class="btn btn-sm btn-warning me-2"
+                (click)="editWarehouse(item)"
+              >
+                Edit
+              </button>
+              <button
+                class="btn btn-sm btn-danger"
+                (click)="deleteWarehouse(item)"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="AllWarehouses!.length === 0">
+            <td colspan="6" class="text-muted py-3">No Warehouses Found</td>
+          </tr>
+        </tbody>
+      </table>
+      <mat-paginator
+        *ngIf="AllWarehouses!.length >= 10"
+        [length]="AllWarehouses!.length"
+        [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 25, 50]"
+        showFirstLastButtons
+      ></mat-paginator>
+    </div>
+  </div>
+</section>
+
+<!-- Add/Edit Dialog -->
+<!-- Add/Edit Dialog -->
+<ng-template #warehouseDialog>
+  <h2 mat-dialog-title>➕ Add Warehouse</h2>
+  <mat-dialog-content>
+    <form [formGroup]="warehouseForm" class="w-100">
+      <!-- Category & Subcategory in one row -->
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="category" class="form-label">Category</label>
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-select
+              id="category"
+              formControlName="category"
+              placeholder="Select Category"
+              required
+            >
+              <mat-option *ngFor="let cat of categories" [value]="cat">
+                {{ cat }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div
+            *ngIf="
+              V['category'].invalid &&
+              (V['category'].dirty || V['category'].touched)
+            "
+            class="text-danger"
+          >
+            Category is required.
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="subcategory" class="form-label">Subcategory</label>
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-select
+              id="subcategory"
+              formControlName="subcategory"
+              placeholder="Select Subcategory"
+              required
+            >
+              <mat-option *ngFor="let sub of subcategories" [value]="sub">
+                {{ sub }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div
+            *ngIf="
+              V['subcategory'].invalid &&
+              (V['subcategory'].dirty || V['subcategory'].touched)
+            "
+            class="text-danger"
+          >
+            Subcategory is required.
+          </div>
+        </div>
+      </div>
+
+      <!-- Quantity -->
+      <div class="row">
+        <div class="col-md-12 mb-3">
+          <label for="quantity" class="form-label">Quantity</label>
+          <input
+            type="number"
+            id="quantity"
+            class="form-control"
+            formControlName="quantity"
+            placeholder="Enter Quantity"
+            required
+            [class.is-invalid]="
+              V['quantity'].invalid &&
+              (V['quantity'].dirty || V['quantity'].touched)
+            "
+          />
+          <div
+            *ngIf="
+              V['quantity'].invalid &&
+              (V['quantity'].dirty || V['quantity'].touched)
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="V['quantity'].errors?.['required']">
+              Quantity is required.
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button
+      mat-stroked-button
+      color="warn"
+      type="button"
+      class="me-3"
+      (click)="onCancel()"
+    >
+      Cancel
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="warehouseForm.invalid"
+      (click)="onSubmit()"
+    >
+      Save
+    </button>
+  </mat-dialog-actions>
+</ng-template>

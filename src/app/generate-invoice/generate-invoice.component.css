@@ -1,0 +1,25 @@
+.action-btn {
+  height: 50px; /* same height for both buttons */
+  padding: 0 25px; /* horizontal padding */
+  font-size: 1rem;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+  color: #fff;
+  border: none;
+}
+
+.see-details-btn {
+  background-color: #007bff; /* Bootstrap primary color */
+}
+
+.see-details-btn:hover {
+  background-color: #0069d9;
+}
+
+.generate-invoice-btn {
+  background-color: #131229; /* your requested color */
+}
+
+.generate-invoice-btn:hover {
+  background-color: #0f0d1f;
+}

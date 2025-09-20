@@ -1,0 +1,40 @@
+<section class="product-section">
+  <!-- Product Name -->
+  <div class="text-center mb-4">
+    <h2 class="product-title">{{ product.name | titlecase }}</h2>
+  </div>
+
+  <!-- Product Card -->
+  <div class="card product-card shadow">
+    <div class="card-body">
+      <!-- Price & Weight -->
+      <div class="row mb-4 text-center">
+        <div class="col-md-6 mb-3 mb-md-0">
+          <p class="label">💰 Price</p>
+          <h5 class="value">₹{{ product.price | number }}</h5>
+        </div>
+        <div class="col-md-6">
+          <p class="label">⚖️ Gross Weight</p>
+          <h5 class="value">{{ product.grossWeight | number : "1.2-2" }} g</h5>
+        </div>
+      </div>
+
+      <hr />
+
+      <!-- Material Details -->
+      <div>
+        <p class="label">🪙 Materials Used</p>
+        <div class="row g-3">
+          <div class="col-md-4" *ngFor="let item of product.items || []">
+            <div class="material-box">
+              <div class="icon">{{ getMaterialIcon(item.category) }}</div>
+              <h6>{{ item.category | titlecase }}</h6>
+              <small>{{ item.subcategory | titlecase }}</small>
+              <div class="qty">{{ item.quantity }} g</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

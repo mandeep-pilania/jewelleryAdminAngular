@@ -1,0 +1,39 @@
+.not-found-section {
+  height: 100vh;
+  background: #f8f9fc;
+}
+
+.error-code {
+  font-size: 8rem;
+  font-weight: 800;
+  color: #1c1b3d;
+  margin-bottom: 10px;
+}
+
+.error-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1c1b3d;
+  margin-bottom: 15px;
+}
+
+.error-message {
+  color: #6c757d;
+  font-size: 1rem;
+  margin-bottom: 25px;
+}
+
+.btn-home {
+  background: #1c1b3d;
+  color: #fff;
+  padding: 10px 25px;
+  border-radius: 30px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn-home:hover {
+  background: #0f0e2a;
+  text-decoration: none;
+}

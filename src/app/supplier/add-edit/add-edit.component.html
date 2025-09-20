@@ -1,0 +1,198 @@
+<section class="p-0">
+  <div class="row">
+    <div
+      class="col-lg-12 d-flex justify-content-between align-items-center mb-3"
+    >
+      <h5>🧾 Add Supplier</h5>
+      <button class="btn btn-primary" (click)="onBack()">← Back</button>
+    </div>
+
+    <div class="col-lg-12">
+      <div
+        class="table-responsive"
+        style="
+          background: #fff;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        "
+      >
+        <form [formGroup]="supplierForm" class="row g-3">
+          <div class="col-md-6 mb-3">
+            <label for="supplierName" class="form-label">Supplier Name</label>
+            <input
+              type="text"
+              id="supplierName"
+              class="form-control"
+              formControlName="supplierName"
+              placeholder="Enter supplier name"
+              required
+              [class.is-invalid]="
+                V['supplierName'].invalid &&
+                (V['supplierName'].dirty || V['supplierName'].touched)
+              "
+            />
+            <div
+              *ngIf="
+                V['supplierName'].invalid &&
+                (V['supplierName'].dirty || V['supplierName'].touched)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="V['supplierName'].errors?.['required']">
+                Supplier Name is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="contactPerson" class="form-label">Contact Person</label>
+            <input
+              type="text"
+              id="contactPerson"
+              class="form-control"
+              formControlName="contactPerson"
+              placeholder="Enter contact person"
+              required
+              [class.is-invalid]="
+                V['contactPerson'].invalid &&
+                (V['contactPerson'].dirty || V['contactPerson'].touched)
+              "
+            />
+            <div
+              *ngIf="
+                V['contactPerson'].invalid &&
+                (V['contactPerson'].dirty || V['contactPerson'].touched)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="V['contactPerson'].errors?.['required']">
+                Contact Person is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="phone" class="form-label">Phone</label>
+            <input
+              type="text"
+              id="phone"
+              class="form-control"
+              formControlName="phone"
+              placeholder="Enter phone"
+              required
+              pattern="[6-9]{1}[0-9]{9}"
+              [class.is-invalid]="
+                V['phone'].invalid && (V['phone'].dirty || V['phone'].touched)
+              "
+            />
+            <div
+              *ngIf="
+                V['phone'].invalid && (V['phone'].dirty || V['phone'].touched)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="V['phone'].errors?.['required']">
+                Phone is required.
+              </div>
+              <div *ngIf="V['phone'].errors?.['pattern']">
+                Enter valid 10 digit phone number.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              id="email"
+              class="form-control"
+              formControlName="email"
+              placeholder="Enter email"
+              required
+              [class.is-invalid]="
+                V['email'].invalid && (V['email'].dirty || V['email'].touched)
+              "
+            />
+            <div
+              *ngIf="
+                V['email'].invalid && (V['email'].dirty || V['email'].touched)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="V['email'].errors?.['required']">
+                Email is required.
+              </div>
+              <div *ngIf="V['email'].errors?.['email']">Enter valid email.</div>
+            </div>
+          </div>
+
+          <div class="col-12 mb-3">
+            <label for="address" class="form-label">Address</label>
+            <textarea
+              id="address"
+              class="form-control"
+              formControlName="address"
+              rows="3"
+              placeholder="Enter address"
+              [class.is-invalid]="
+                V['address'].invalid &&
+                (V['address'].dirty || V['address'].touched)
+              "
+            ></textarea>
+            <div
+              *ngIf="
+                V['address'].invalid &&
+                (V['address'].dirty || V['address'].touched)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="V['address'].errors?.['required']">
+                Address is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="type" class="form-label">Type</label>
+            <select
+              id="type"
+              class="form-control"
+              formControlName="type"
+              required
+              [class.is-invalid]="
+                V['type'].invalid && (V['type'].dirty || V['type'].touched)
+              "
+            >
+              <option value="">Select type</option>
+              <option value="local">Local</option>
+              <option value="national">National</option>
+              <option value="international">International</option>
+            </select>
+            <div
+              *ngIf="
+                V['type'].invalid && (V['type'].dirty || V['type'].touched)
+              "
+              class="invalid-feedback"
+            >
+              <div *ngIf="V['type'].errors?.['required']">
+                Type is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 d-flex justify-content-center mt-3">
+            <button
+              class="btn btn-primary"
+              style="width: 200px"
+              [disabled]="supplierForm.invalid"
+              (click)="onSubmit()"
+            >
+              Add Supplier
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

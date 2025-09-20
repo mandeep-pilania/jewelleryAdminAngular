@@ -1,0 +1,38 @@
+/* FormArray box styling */
+.form-array-box {
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  background-color: #f1f3f5;
+  padding: 15px;
+}
+
+/* Row wrap ko disable kare */
+.form-array-box .row {
+  flex-wrap: nowrap; /* important */
+  gap: 10px; /* optional spacing between fields */
+}
+
+/* Validation message ke liye fixed height */
+.invalid-feedback {
+  min-height: 18px;
+  display: block;
+  visibility: hidden;
+}
+
+.is-invalid ~ .invalid-feedback {
+  visibility: visible;
+}
+
+/* Remove button alignment fix */
+.remove-btn-col {
+  display: flex;
+  align-items: center; /* vertical center */
+  justify-content: center; /* horizontal center */
+  padding: 0;
+}
+
+.remove-btn {
+  margin: 0;
+  line-height: 1; /* icon center properly */
+  padding: 4px 8px; /* optional, match input height */
+}
