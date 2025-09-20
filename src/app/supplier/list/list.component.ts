@@ -19,7 +19,7 @@ export class ListComponent {
   }
 
   GetAllSupplier(): void {
-    this._service.GetAll('').subscribe({
+    this._service.Get('').subscribe({
       next: (res: any) => {
         this.AllSupplier = res;
       },

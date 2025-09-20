@@ -19,7 +19,7 @@ export class ListComponent {
   }
 
   GetAllPaymentRecord(): void {
-    this._service.GetAll('').subscribe({
+    this._service.Get('').subscribe({
       next: (res: any) => {
         this.AllPayments = res;
       },

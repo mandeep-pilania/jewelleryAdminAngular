@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { ApiService } from 'src/app/helpers/api.service';
+import { environment } from 'src/environment/environment';
 
 @Component({
   selector: 'app-add-edit',
@@ -8,20 +12,28 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 })
 export class AddEditComponent {
   productForm!: FormGroup;
+  ProductId:any;
   subcategories = ['22k', '24k', '18k', '15k'];
-  categories = ['Gold', 'Silver', 'Diamond'];
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private _service:ApiService, private router:Router, private toastr:ToastrService, private _activeRouter:ActivatedRoute) {
     this.productForm = this.fb.group({
-      name: ['', Validators.required],
-      price: ['', [Validators.required, Validators.min(1)]],
-      grossWeight: ['', [Validators.required, Validators.min(0.1)]],
-      meterial: this.fb.array([]), // Only one FormArray
-    });
+      ProductName: ['', Validators.required],
+      Price: ['', [Validators.required, Validators.min(1)]],
+      GrossWeight: ['', [Validators.required, Validators.min(0.1)]],
+      Meterial: this.fb.array([]), // Only one FormArray
+    });                                       
+
+    this._activeRouter.queryParams.subscribe((res:any)=>{
+     if(res?.id){
+      this.ProductId=res?.id
+      this.getSingleProduct(this.ProductId)
+     }
+    })
   }
 
   ngOnInit(): void {
     // Start with one row
     this.addItem();
+    this.getCategies()
   }
 
   // Getters for easy access
@@ -29,28 +41,28 @@ export class AddEditComponent {
     return this.productForm.controls;
   }
 
-  get meterial(): FormArray {
-    return this.productForm.get('meterial') as FormArray;
+  get Meterial(): FormArray {
+    return this.productForm.get('Meterial') as FormArray;
   }
 
   // Create a single row
   newItem(): FormGroup {
     return this.fb.group({
-      category: ['', Validators.required],
-      subcategory: ['', Validators.required],
-      weight: ['', [Validators.required, Validators.min(0.1)]],
+      CategoryID: ['', Validators.required],
+      SubCategoryID: ['', Validators.required],
+      Weight: ['', [Validators.required, Validators.min(0.1)]],
     });
   }
 
   // Add a row
   addItem() {
-    this.meterial.push(this.newItem());
+    this.Meterial.push(this.newItem());
   }
 
   // Remove a row
   removeItem(i: number) {
-    if (this.meterial.length > 1) {
-      this.meterial.removeAt(i);
+    if (this.Meterial.length > 1) {
+      this.Meterial.removeAt(i);
     }
   }
 
@@ -65,12 +77,76 @@ export class AddEditComponent {
       this.productForm.markAllAsTouched();
       return;
     }
-
-    console.log('✅ Product Submitted:', this.productForm.value);
-
-    // Reset form
+    let payload={
+      ...this.productForm.value
+    }
+    this._service.Post('AkashalokUsers/AddProduct',payload).subscribe({
+      next: (res: any) => {
+        if(res?.success){
+           this.router.navigateByUrl('/products')
+         }else{
+           this.toastr.error(res?.message)
+        }
+          },
+      error: (err) => {
+        this.toastr.error(err);
+      },
+    });
     this.productForm.reset();
-    this.meterial.clear();
+    this.Meterial.clear();
     this.addItem();
+  }
+
+  AllCategories:any=[];
+  getCategies(){
+    this._service.Get(environment.apiUrl+'AkashalokUsers/GetCategories').subscribe({
+      next: (res: any) => {
+        if(res?.success){
+          this.AllCategories = res?.data;
+          console.log(res)
+         }else{
+           this.toastr.error(res?.message)
+        }
+          },
+      error: (err) => {
+        this.toastr.error(err);
+      },
+    });
+  }
+
+  ChangeCategory(event:any){
+    this.getSubCategies(event.target.value)
+  }
+  AllSubCategories:any=[];
+  getSubCategies(categoryId:any){
+    this._service.Get(environment.apiUrl+`AkashalokUsers/GetSubCategories?categoryId=${categoryId}`).subscribe({
+      next: (res: any) => {
+        if(res?.success){
+          this.AllSubCategories = res?.data;
+          console.log(res)
+         }else{
+           this.toastr.error(res?.message)
+        }
+          },
+      error: (err) => {
+        this.toastr.error(err);
+      },
+    });
+  }
+
+
+  getSingleProduct(id:any){
+    this._service.Get(environment.apiUrl+'AkashalokUsers/GetProductById').subscribe({
+      next: (res: any) => {
+        if(res?.success){
+           console.log(res)
+         }else{
+           this.toastr.error(res?.message)
+        }
+          },
+      error: (err) => {
+        this.toastr.error(err);
+      },
+    });
   }
 }

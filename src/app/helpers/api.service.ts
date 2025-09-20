@@ -11,7 +11,7 @@ export class ApiService {
   Post(url: string, payload: any) {
     return this._http.post(environment.apiUrl + url, payload);
   }
-  GetAll(url: string) {
+  Get(url: string) {
     return this._http.get(url);
   }
 }

@@ -34,7 +34,7 @@ export class ListComponent {
   }
 
   GetAllCategories(): void {
-    this._service.GetAll('').subscribe({
+    this._service.Get('').subscribe({
       next: (res: any) => {
         this.AllBrands = res;
       },

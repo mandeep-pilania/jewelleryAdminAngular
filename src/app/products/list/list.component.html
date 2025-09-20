@@ -20,24 +20,25 @@
               <th>Metieral</th>
               <th>Price (₹)</th>
               <th>Gross Weight (g)</th>
-              <th>Status</th>
+              <!-- <th>Status</th> -->
               <th>Created Date</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let product of AllProducts">
-              <td>{{ product.name | titlecase }}</td>
+              <td>{{ product.productName | titlecase }}</td>
               <td>
-                <div *ngFor="let item of product.items || []">
-                  <strong>{{ item.category | titlecase }}</strong> /
-                  <em>{{ item.subcategory | titlecase }}</em> :
-                  {{ item.quantity }} (g)
+                <div *ngFor="let item of product.meterial
+                || []">
+                  <strong>{{ item.categoryName | titlecase }}</strong> /
+                  <em>{{ item.subCategoryName | titlecase }}</em> :
+                  {{ item.weight }} (g)
                 </div>
               </td>
               <td>₹{{ product.price | number }}</td>
               <td>{{ product.grossWeight | number : "1.2-2" }} (g)</td>
-              <td>
+              <!-- <td>
                 <span
                   [ngClass]="{
                     'text-success': product.status === 'Active',
@@ -46,8 +47,8 @@
                 >
                   {{ product.status }}
                 </span>
-              </td>
-              <td>{{ product.createdDate | date : "short" }}</td>
+              </td> -->
+              <td>{{ product.created | date : "short" }}</td>
               <td>
                 <button
                   class="btn btn-sm btn-outline-primary me-2"

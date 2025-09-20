@@ -2,8 +2,10 @@ import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from 'src/app/helpers/api.service';
+import { environment } from 'src/environment/environment';
 
 @Component({
   selector: 'app-list',
@@ -47,7 +49,8 @@ export class ListComponent {
   constructor(
     private toastr: ToastrService,
     private _service: ApiService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
@@ -55,10 +58,15 @@ export class ListComponent {
   }
 
   GetAllProducts(): void {
-    this._service.GetAll('').subscribe({
+    this._service.Get(environment.apiUrl+'AkashalokUsers/GetAllProducts').subscribe({
       next: (res: any) => {
-        this.AllProducts = res;
-      },
+        if(res?.success){
+          this.AllProducts = res?.data;
+          console.log(res)
+         }else{
+           this.toastr.error(res?.message)
+        }
+          },
       error: (err) => {
         this.toastr.error(err);
       },
@@ -69,7 +77,11 @@ export class ListComponent {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
-  onEdit(data: any) {}
+  onEdit(product: any) {
+    this.router.navigate(['/products/edit'], {
+      queryParams: { id: product.productID }
+    });
+  }
   onDelete(data: any) {}
   selectedProduct: any = null;
 
